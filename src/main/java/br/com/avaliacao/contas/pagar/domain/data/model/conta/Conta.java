@@ -5,14 +5,12 @@ import br.com.avaliacao.contas.pagar.domain.data.serialization.LocalDateSerializ
 import br.com.avaliacao.contas.pagar.domain.data.serialization.LocalDateDeserializer;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
-import jakarta.validation.constraints.NotNull;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
 
 public class Conta extends ModelBusiness {
 
-    @NotNull
     private BigDecimal valor;
     private Situacao situacao;
     private String descricao;

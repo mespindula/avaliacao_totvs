@@ -3,7 +3,6 @@ package br.com.avaliacao.contas.pagar.infrastructure.secutity;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import jakarta.servlet.FilterChain;
 import org.springframework.security.authentication.AuthenticationManager;
-import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -25,7 +24,7 @@ public class JWTAuthenticationFilter extends AbstractAuthenticationProcessingFil
     }
 
     @Override
-    public Authentication attemptAuthentication(HttpServletRequest request, HttpServletResponse response) throws AuthenticationException, IOException, ServletException {
+    public Authentication attemptAuthentication(HttpServletRequest request, HttpServletResponse response) throws AuthenticationException {
         try {
             AccountCredentials credentials = new ObjectMapper().readValue(request.getInputStream(), AccountCredentials.class);
 
@@ -48,7 +47,7 @@ public class JWTAuthenticationFilter extends AbstractAuthenticationProcessingFil
             HttpServletRequest request,
             HttpServletResponse response,
             FilterChain filterChain,
-            Authentication auth) throws IOException, ServletException {
+            Authentication auth) throws IOException {
 
         AuthorizationUtil.addAuthentication(auth.getName(), response);
 
