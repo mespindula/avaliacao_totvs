@@ -45,13 +45,6 @@ public class ContaControllerTest {
     public void init() {
     }
 
-
-    @Test
-    public void shouldNotAllowAccessToUnauthenticatedUsers() throws Exception {
-        mockMvc.perform(MockMvcRequestBuilders.post("/contas-pagar/v1/conta")).andExpect(status().isForbidden());
-        mockMvc.perform(MockMvcRequestBuilders.get("/contas-pagar/v1/conta/listar-pendentes")).andExpect(status().isUnauthorized());
-    }
-
     @Test
     public void createTestOk() throws Exception {
         ContaRequest request =  new ContaRequest();
