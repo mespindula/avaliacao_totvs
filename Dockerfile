@@ -1,18 +1,9 @@
 FROM amazoncorretto:17
 
-ARG PROFILE
-ARG ADDITIONAL_OPTS
+ARG JAR_FILE=target/*.jar
 
-ENV PROFILE=${PROFILE}
-ENV ADDITIONAL_OPTS=${ADDITIONAL_OPTS}
+COPY ${JAR_FILE} contas-pagar.jar
 
-WORKDIR /opt/contas_pagar
+CMD apt-get update -y
 
-COPY /target/contas-pagar*.jar contas-pagar.jar
-
-SHELL ["/bin/sh", "-c"]
-
-EXPOSE 5005
-EXPOSE 8080
-
-CMD java ${ADDITIONAL_OPTS} -jar contas-pagar.jar --spring.profiles.active=${PROFILE}
+ENTRYPOINT ["java", "-Xmx2048M", "-jar", "/contas-pagar.jar"]

@@ -12,9 +12,11 @@ API Spring Boot JWT
     POST api/contas-pagar/v1/conta/import-pendentes Content-Type: application/octet-stream
     arquivo: src/main/resources/import-csv/import-pendentes.csv
 
-# Para realizar Build/Deploy Maven
-	mvn clean install
-	mvn dockerfile:push
+# Para realizar Build Maven
+	mvn clean package -f pom.xml
+
+# Para realizar Deploy Docker
+	sudo docker-compose up --build
 
 # Swagger
 	http://localhost:8080/api/swagger-ui.html

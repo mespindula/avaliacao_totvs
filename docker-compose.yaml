@@ -1,13 +1,29 @@
 version: '3'
+
 services:
   contas_pagar:
     build:
       context: ./
       dockerfile: ./Dockerfile
-    image: contas_pagar/api
+    container_name: contas_pagar
+    depends_on:
+      - db
+    environment:
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=1234
+      - SPRING_DATASOURCE_URL=jdbc:postgresql://db:5432/financeiro
+      - SPRING_DATASOURCE_USERNAME=postgres
+      - SPRING_DATASOURCE_PASSWORD=1234
+      - SPRING_JPA_HIBERNATE_DDL_AUTO=update
     ports:
       - '8080:8080'
-      - '5005:5005'
+
+  db:
+    image: postgres
+    container_name: db_postgresql
     environment:
-      - ADDITIONAL_OPTS=-agentlib:jdwp=transport=dt_socket,server=y,suspend=n,address=127.0.0.1:5005 -Xmx1G -Xms128m -XX:MaxMetaspaceSize=128m
-      - PROFILE=dev
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=1234
+      - POSTGRES_DB=financeiro
+    ports:
+      - "5432:5432"
