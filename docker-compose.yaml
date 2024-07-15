@@ -6,6 +6,7 @@ services:
       context: ./
       dockerfile: ./Dockerfile
     container_name: contas_pagar
+    image: mespindula/contas-pagar
     depends_on:
       - db
     environment:
